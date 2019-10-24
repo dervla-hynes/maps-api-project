@@ -1,1 +1,18 @@
+//partials imports
 @import "partials/maps";
+
+//vendor imports
+@import "vendor/reset";
+
+//module imports
+@import "modules/colors";
+@import "modules/responsiveness";
+@import "modules/typography";
+
+//component imports
+@import "components/nav";
+
+
+body {
+    font-family: $font-family
+}
