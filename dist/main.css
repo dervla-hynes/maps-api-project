@@ -76,6 +76,8 @@ nav #logo {
     text-align: center; }
     #content #text h2 {
       font-size: 1.5em; }
+    #content #text p {
+      padding: 10px 0px; }
 
 body {
   font-family: "Ubuntu", sans-serif;
