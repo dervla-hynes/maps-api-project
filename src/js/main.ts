@@ -1,9 +1,13 @@
 import { ILocation, initMap } from './maps/maps';
 import { getOnePokemon } from './pokemon/pokemon';
 
-const uluru: ILocation = {lat: -25.344, lng: 131.036};
+//locations
+const London: ILocation = {lat: 51.5033, lng: -0.1195};
+const Paris: ILocation = {lat: 48.8566, lng: 2.3522};
+const Seoul: ILocation = {lat: 37.5665, lng: 126.9780};
 
-initMap(uluru);
+//intitial map on the page
+initMap(London);
 
 // SIMPLE GET USING THE POKEAPI
 getOnePokemon(1).then((data) => {

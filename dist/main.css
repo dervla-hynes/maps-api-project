@@ -3,8 +3,9 @@
   display: block;
   margin: 40px auto;
   border: 2px solid black;
-  height: 500px;
-  width: 800px; }
+  height: 400px;
+  width: 400px;
+  padding: 0px 20px; }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -57,7 +58,25 @@ nav #logo {
   background-color: #156125;
   color: white;
   text-align: center;
-  padding: 20px; }
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em; }
+  nav #logo i {
+    padding: 0px 20px; }
+
+#content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 50px 0px; }
+  #content #text {
+    width: 50%;
+    text-align: center; }
+    #content #text h2 {
+      font-size: 1.5em; }
 
 body {
-  font-family: "Ubuntu", sans-serif; }
+  font-family: "Ubuntu", sans-serif;
+  background-color: #50c563; }

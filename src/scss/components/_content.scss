@@ -1,0 +1,15 @@
+#content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 50px 0px;
+
+    #text {
+        width: 50%;
+        text-align: center;
+
+        h2 {
+            font-size: 1.5em;
+        }
+    }
+}
