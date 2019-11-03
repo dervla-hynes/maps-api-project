@@ -6,7 +6,6 @@ import { getLatLong } from './maps/geocoder';
 const London: ILocation = {name: "London", lat: 51.5033, lng: -0.1195};
 const Paris: ILocation = {name: "Paris", lat: 48.8566, lng: 2.3522};
 const Seoul: ILocation = {name: "Seoul", lat: 37.5665, lng: 126.9780};
-// const home: ILocation = {name: "home", lat: 51.3300643, lng: -0.5631121};
 
 //function to update the html with new restaurants
 const updateHtml = (topRestaurants, location:ILocation) => {
@@ -29,38 +28,30 @@ getVeggieRestaurants(London).then((data) => {
 
 const generateNewMap = (location: ILocation) => {
     let topRestaurants;
+    let restOne;
     getVeggieRestaurants(location).then((data) => {
 
         // Response data from the veggie restarants API
-        console.log(data);
         topRestaurants = data.entries.splice(0,5);
-        console.log(topRestaurants);
     
         //updating html on the page
         updateHtml(topRestaurants, location);
 
         //get lat and long for each restaurant 
         //geocoder api request
+
         getLatLong(topRestaurants[0]).then((data) => {
-        // Response data from the  API
+            // Response data from the  API
+            console.log(data.results[0].geometry.location);
+            restOne = data.results[0].geometry.location;
+            return restOne;
+        })
+    }).then(() => getLatLong(topRestaurants[0]).then((data) => {
         console.log(data.results[0].geometry.location);
-        //results in the form of data.results[0].geometry.location.lat and data.results[0].geometry.location.lng
-
-        //try to turn this into an array 
-        // const addressArray = topRestaurants.map((restaurant) => {
-        //     getLatLong(restaurant).then((data) => {
-        //         // Response data from the  API
-        //         return data.results[0].geometry.location;
-        //         //results in the form of data.results[0].geometry.location.lat and data.results[0].geometry.location.lng
-        //         console.log(data.results[0].geometry.location);
-        //     });
-        // })
-        // console.log(addressArray);
-        });
-    });
-    initMap(location, topRestaurants);
+        restOne = data.results[0].geometry.location;
+        return restOne;
+    })).then(() => initMap(location, topRestaurants, restOne));
 }
-
 
 //intitial map on the page
 generateNewMap(London);
