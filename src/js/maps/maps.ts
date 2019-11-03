@@ -9,7 +9,7 @@ export interface ILocation {
 
 //Initialising a map function
 
-export const initMap = (coordinates: ILocation): google.maps.Map => {
+export const initMap = (coordinates: ILocation, restaurants): google.maps.Map => {
   let map: google.maps.Map = new google.maps.Map(
     document.getElementById('map'), 
     { zoom: 11, 

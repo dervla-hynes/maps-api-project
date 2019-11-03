@@ -8,9 +8,6 @@ const Paris: ILocation = {name: "Paris", lat: 48.8566, lng: 2.3522};
 const Seoul: ILocation = {name: "Seoul", lat: 37.5665, lng: 126.9780};
 // const home: ILocation = {name: "home", lat: 51.3300643, lng: -0.5631121};
 
-//intitial map on the page
-initMap(London);
-
 //function to update the html with new restaurants
 const updateHtml = (topRestaurants, location:ILocation) => {
     document.getElementById("restaurants").innerHTML = `<h2>Showing restaurants in: ${location.name}</h2><p>1: ${topRestaurants[0].name}: ${topRestaurants[0].short_description} </p><p>2: ${topRestaurants[1].name}: ${topRestaurants[1].short_description}</p><p>3: ${topRestaurants[2].name}: ${topRestaurants[2].short_description}</p><p>4. ${topRestaurants[3].name}: ${topRestaurants[3].short_description}</p><p>5. ${topRestaurants[4].name}: ${topRestaurants[4].short_description}</p>`
@@ -31,18 +28,42 @@ getVeggieRestaurants(London).then((data) => {
 //function to generate map and update the html for a new location:
 
 const generateNewMap = (location: ILocation) => {
-    initMap(location);
+    let topRestaurants;
     getVeggieRestaurants(location).then((data) => {
 
         // Response data from the veggie restarants API
         console.log(data);
-        const topRestaurants = data.entries.splice(0,5);
+        topRestaurants = data.entries.splice(0,5);
         console.log(topRestaurants);
     
         //updating html on the page
         updateHtml(topRestaurants, location);
+
+        //get lat and long for each restaurant 
+        //geocoder api request
+        getLatLong(topRestaurants[0]).then((data) => {
+        // Response data from the  API
+        console.log(data.results[0].geometry.location);
+        //results in the form of data.results[0].geometry.location.lat and data.results[0].geometry.location.lng
+
+        //try to turn this into an array 
+        // const addressArray = topRestaurants.map((restaurant) => {
+        //     getLatLong(restaurant).then((data) => {
+        //         // Response data from the  API
+        //         return data.results[0].geometry.location;
+        //         //results in the form of data.results[0].geometry.location.lat and data.results[0].geometry.location.lng
+        //         console.log(data.results[0].geometry.location);
+        //     });
+        // })
+        // console.log(addressArray);
+        });
     });
+    initMap(location, topRestaurants);
 }
+
+
+//intitial map on the page
+generateNewMap(London);
 
 // Button functionality for changing the map for a new city
 
@@ -55,11 +76,7 @@ londonButton.addEventListener("click", () => generateNewMap(London));
 const seoulButton = document.getElementById("seoul-button");
 seoulButton.addEventListener("click", () => generateNewMap(Seoul));
 
-//geocoder api request
-getLatLong("10 fairlawn park","woking","united kingdom").then((data) => {
-    // Response data from the  API
-    console.log(data);
-});
+
 
 
 
