@@ -29,27 +29,21 @@ getVeggieRestaurants(London).then((data) => {
 const generateNewMap = (location: ILocation) => {
     let topRestaurants;
     let restOne;
+    //1: get the list of restaurants
     getVeggieRestaurants(location).then((data) => {
-
         // Response data from the veggie restarants API
         topRestaurants = data.entries.splice(0,5);
     
         //updating html on the page
         updateHtml(topRestaurants, location);
 
-        //get lat and long for each restaurant 
         //geocoder api request
-
-        getLatLong(topRestaurants[0]).then((data) => {
-            // Response data from the  API
-            console.log(data.results[0].geometry.location);
-            restOne = data.results[0].geometry.location;
-            return restOne;
-        })
+        //2: get the lat and long of this list of restaurants
     }).then(() => getLatLong(topRestaurants[0]).then((data) => {
         console.log(data.results[0].geometry.location);
         restOne = data.results[0].geometry.location;
         return restOne;
+        //3: then initialise the map with the correct markers
     })).then(() => initMap(location, topRestaurants, restOne));
 }
 
