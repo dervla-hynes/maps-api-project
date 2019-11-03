@@ -2,20 +2,20 @@ import { ILocation, initMap } from './maps/maps';
 import { getVeggieRestaurants } from './veggie-api/veggie-data';
 
 //locations
-const London: ILocation = {lat: 51.5033, lng: -0.1195};
-const Paris: ILocation = {lat: 48.8566, lng: 2.3522};
-const Seoul: ILocation = {lat: 37.5665, lng: 126.9780};
+const London: ILocation = {name: "London", lat: 51.5033, lng: -0.1195};
+const Paris: ILocation = {name: "Paris", lat: 48.8566, lng: 2.3522};
+const Seoul: ILocation = {name: "Seoul", lat: 37.5665, lng: 126.9780};
 
 //intitial map on the page
 initMap(London);
 
 //function to update the html with new restaurants
-const updateHtml = (topRestaurants) => {
-    document.getElementById("restaurants").innerHTML = `<h2>Showing restaurants in: London</h2><p>1: ${topRestaurants[0].name}: ${topRestaurants[0].short_description} </p><p>2: ${topRestaurants[1].name}: ${topRestaurants[1].short_description}</p><p>3: ${topRestaurants[2].name}: ${topRestaurants[2].short_description}</p><p>4. ${topRestaurants[3].name}: ${topRestaurants[3].short_description}</p><p>5. ${topRestaurants[4].name}: ${topRestaurants[4].short_description}</p>`
+const updateHtml = (topRestaurants, location:ILocation) => {
+    document.getElementById("restaurants").innerHTML = `<h2>Showing restaurants in: ${location.name}</h2><p>1: ${topRestaurants[0].name}: ${topRestaurants[0].short_description} </p><p>2: ${topRestaurants[1].name}: ${topRestaurants[1].short_description}</p><p>3: ${topRestaurants[2].name}: ${topRestaurants[2].short_description}</p><p>4. ${topRestaurants[3].name}: ${topRestaurants[3].short_description}</p><p>5. ${topRestaurants[4].name}: ${topRestaurants[4].short_description}</p>`
 }
 
 // Get the restaurants for a specific area
-getVeggieRestaurants(London.lat, London.lng).then((data) => {
+getVeggieRestaurants(London).then((data) => {
 
     // Response data from the veggie restarants API
     console.log(data);
@@ -23,14 +23,14 @@ getVeggieRestaurants(London.lat, London.lng).then((data) => {
     console.log(topRestaurants);
 
     //updating html on the page
-    updateHtml(topRestaurants);
+    updateHtml(topRestaurants, London);
 });
 
 //function to generate map and update the html for a new location:
 
 const generateNewMap = (location: ILocation) => {
     initMap(location);
-    getVeggieRestaurants(location.lat, location.lng).then((data) => {
+    getVeggieRestaurants(location).then((data) => {
 
         // Response data from the veggie restarants API
         console.log(data);
@@ -38,7 +38,7 @@ const generateNewMap = (location: ILocation) => {
         console.log(topRestaurants);
     
         //updating html on the page
-        updateHtml(topRestaurants);
+        updateHtml(topRestaurants, location);
     });
 }
 

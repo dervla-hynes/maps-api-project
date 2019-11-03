@@ -2,6 +2,7 @@ import {} from 'googlemaps';
 import { styles } from './maps-data';
 
 export interface ILocation {
+  name: string;
   lat: number,
   lng: number
 }
