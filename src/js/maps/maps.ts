@@ -10,12 +10,16 @@ export interface ILocation {
 //Initialising a map function
 
 export const initMap = (coordinates: ILocation): google.maps.Map => {
-  var map: google.maps.Map = new google.maps.Map(
+  let map: google.maps.Map = new google.maps.Map(
     document.getElementById('map'), 
     { zoom: 11, 
       center: coordinates
     }
   );
-  var marker: google.maps.Marker = new google.maps.Marker({position: coordinates, map: map});
+  let markerOne: google.maps.Marker = new google.maps.Marker({position: coordinates, map: map});
+  let markerTwo: google.maps.Marker = new google.maps.Marker({position: coordinates, map: map});
+  let markerThree: google.maps.Marker = new google.maps.Marker({position: coordinates, map: map});
+  let markerFour: google.maps.Marker = new google.maps.Marker({position: coordinates, map: map});
+  let markerFive: google.maps.Marker = new google.maps.Marker({position: coordinates, map: map});
   return map;
 }

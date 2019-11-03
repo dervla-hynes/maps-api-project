@@ -1,10 +1,12 @@
 import { ILocation, initMap } from './maps/maps';
 import { getVeggieRestaurants } from './veggie-api/veggie-data';
+import { getLatLong } from './maps/geocoder';
 
 //locations
 const London: ILocation = {name: "London", lat: 51.5033, lng: -0.1195};
 const Paris: ILocation = {name: "Paris", lat: 48.8566, lng: 2.3522};
 const Seoul: ILocation = {name: "Seoul", lat: 37.5665, lng: 126.9780};
+// const home: ILocation = {name: "home", lat: 51.3300643, lng: -0.5631121};
 
 //intitial map on the page
 initMap(London);
@@ -52,4 +54,12 @@ londonButton.addEventListener("click", () => generateNewMap(London));
 
 const seoulButton = document.getElementById("seoul-button");
 seoulButton.addEventListener("click", () => generateNewMap(Seoul));
+
+//geocoder api request
+getLatLong("10 fairlawn park","woking","united kingdom").then((data) => {
+    // Response data from the  API
+    console.log(data);
+});
+
+
 
