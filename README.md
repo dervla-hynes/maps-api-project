@@ -1,11 +1,9 @@
-# Maps Starter
+# Google Maps 'VeggiMaps' Project
 
 ## Notes on build
 
-The same Typescript starter you already have, with the following added: 
- - `@types/googlemaps` package gives us access to the google types, such as google.maps.Map and google.maps.Marker
- - `index.d.ts` file declares googlemaps as a module, because it isn't one out of the box. Don't worry about this one - it's purely to avoid an annoying squiggly line and could be omitted.
+This project uses three API's working together:
 
-## Testing
-
-This app interacts with the dom a lot, much like your other projects. Testing the google object would be extremely difficult as a result, and is probably not time-efficient. You could test other location generation or maths though!
+1. Google maps API - generates a map and adds the markers.
+2. 'Veg Guide' REST API - gets data about vegetarian restaurants for a given location.
+3. Geocoder API - gets a lat and long for a given address input.
